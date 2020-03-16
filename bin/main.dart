@@ -56,11 +56,13 @@ dynamic doCalculation(dynamic a, dynamic b, String exp) {
 }
 
 void main() {
-  Node d = Node(value: '3');
+  Node i = Node(value: '5');
+  Node j = Node(value: '4');
+  Node d = Node(value: '+',left: i,right: j);
   Node e = Node(value: '2');
   Node f = Node(value: '4');
   Node g = Node(value: '2');
-  Node b = Node(value: '3', left: d, right: e);
+  Node b = Node(value: '+', left: d, right: e);
   Node c = Node(value: '/', left: f, right: g);
   Node a = Node(value: '*', right: b, left: c);
   print(resolveTree(a));
