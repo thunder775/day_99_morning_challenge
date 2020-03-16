@@ -13,8 +13,59 @@
 //    /  \    / \
 //   3    2  4   5
 //  You should return 45, as it is (3 + 2) * (4 + 5).
+class Node {
+  String value;
+  Node right;
+  Node left;
 
+  Node({this.value, this.left, this.right});
+}
 
+dynamic resolveTree(Node head) {
+  dynamic a;
+  dynamic b;
+  // check head's left node is a leaf
+  if (head.left.left == null) {
+    a = int.parse(head.left.value);
+  }
+
+  // check head's right node is a leaf
+  if (head.right.left == null) {
+    b = int.parse(head.right.value);
+  }
+  //left node is not a leaf
+  if (a == null) {
+    a = resolveTree(head.left);
+  }
+  //right node is not a leaf
+  if (b == null) {
+    b = resolveTree(head.right);
+  }
+  return doCalculation(a, b, head.value);
+}
+
+dynamic doCalculation(int a, int b, String exp) {
+  if (exp == '+') {
+    return a + b;
+  }
+  if (exp == '-') {
+    return a - b;
+  }
+  if (exp == '*') {
+    return a * b;
+  }
+  if (exp == '/') {
+    return a / b;
+  }
+}
 
 void main() {
+  Node d = Node(value: '3');
+  Node e = Node(value: '2');
+  Node f = Node(value: '4');
+  Node g = Node(value: '5');
+  Node b = Node(value: '+', left: d, right: e);
+  Node c = Node(value: '+', left: f, right: g);
+  Node a = Node(value: '*', right: b, left: c);
+  print(resolveTree(a));
 }
