@@ -44,28 +44,24 @@ dynamic resolveTree(Node head) {
   return doCalculation(a, b, head.value);
 }
 
-dynamic doCalculation(int a, int b, String exp) {
-  if (exp == '+') {
-    return a + b;
-  }
-  if (exp == '-') {
-    return a - b;
-  }
-  if (exp == '*') {
-    return a * b;
-  }
-  if (exp == '/') {
-    return a / b;
-  }
+Map<String, Function> operations = {
+  '+':(dynamic a , dynamic b )=>a+b,
+  '-':(dynamic a , dynamic b )=>a-b,
+  '*':(dynamic a , dynamic b )=>a*b,
+  '/':(dynamic a , dynamic b )=>a/b,
+};
+
+dynamic doCalculation(dynamic a, dynamic b, String exp) {
+  return operations[exp](a,b);
 }
 
 void main() {
   Node d = Node(value: '3');
   Node e = Node(value: '2');
   Node f = Node(value: '4');
-  Node g = Node(value: '5');
-  Node b = Node(value: '+', left: d, right: e);
-  Node c = Node(value: '+', left: f, right: g);
+  Node g = Node(value: '2');
+  Node b = Node(value: '3', left: d, right: e);
+  Node c = Node(value: '/', left: f, right: g);
   Node a = Node(value: '*', right: b, left: c);
   print(resolveTree(a));
 }
